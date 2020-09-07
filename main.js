@@ -28,6 +28,8 @@ async function main(hardwareId, sensorValue) {
   console.log("A batch have been sent to the event hub");
 }
 
-main('test_4', 55).catch((err) => {
-  console.log("Error occurred: ", err);
-});
+// main('tTESTSESTSTSTSTSTST_4', 555).catch((err) => {
+//   console.log("Error occurred: ", err);
+// });
+
+exports.main = main;

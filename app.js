@@ -32,21 +32,21 @@ const influx = new Influx.InfluxDB({
   ]
 });
 
-influx.getDatabaseNames()
-  .then(names => {
-    if (!names.includes('telemetry')) {
-      return error => console.log({error})
-    }
-  })
-  .then(() => {
-    app.listen(app.get('port'), () => {
-      console.log(`Listening on ${app.get('port')}.`);
-    });
-  })
-  .catch(error => console.log({ error }));
+// influx.getDatabaseNames()
+//   .then(names => {
+//     if (!names.includes('telemetry')) {
+//       return error => console.log({error})
+//     }
+//   })
+//   .then(() => {
+//       app.listen(app.get('port'), () => {
+//       console.log(`Listening on ${app.get('port')}.`);
+//     });
+//   })
+//   .catch(error => console.log({ error }));
 
 app.get('/', (request, response) => {
-  const { place } = request.params;
+
   influx.query(`
     select * from sensors
     limit 10
@@ -54,3 +54,5 @@ app.get('/', (request, response) => {
     .then(result => response.status(200).json(result))
     .catch(error => response.status(500).json({ error }));
 });
+
+module.exports = app;
