@@ -3,20 +3,24 @@ const expect = chai.expect;
 const assert = require('assert');
 const main = require('../main');
 const app = require('../app');
+const event= require('../fixtures');
 
 
 chai.use(chaiHttp);
 chai.should();
 
+let date = new Date().toISOString();
+let hardwareId = event[1].HardwareId;
+let sensorValue = event[1].SensorValue;
+
 
 describe('',  () => {
   before(async () => {
-    await main.main('777777', 77);
-    await main.main('888888', 88);
+    await main.main(date, hardwareId, sensorValue);
   });
 
 
-  it('TESTTTTTTT', (done) => {
+  it('all fields from event should saved correctly', (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
@@ -24,15 +28,17 @@ describe('',  () => {
         expect(res.body).to.have.lengthOf(10);
         // expect(res.body[0]).to.have.property('value').eq(3000);
         // expect(res.body[1]).to.have.property('value').eq(10000);
-        expect(res.body).to.deep.include({
-            time: '1754-08-30T22:43:41.128Z',
-            sensorId: '!!!!!!!!!!!_4_mult',
-            value: 3000
+        expect(res.body).to.deep.include( {
+            time: date,
+            sensorId: `${hardwareId}_mult`,
+            value: sensorValue*2
           }
         )
         console.log(res.body);
         done();
       });
   });
+
+
 
 })

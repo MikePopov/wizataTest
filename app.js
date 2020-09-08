@@ -54,4 +54,13 @@ app.get('/', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
+app.get('/delete', (request, response) => {
+  influx.query(`
+    select * from sensors 
+    limit 2
+  `)
+    .then(result => response.status(200).json(result))
+    .catch(error => response.status(500).json({ error }));
+});
+
 module.exports = app;
