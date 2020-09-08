@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const app = express();
+export const app = express();
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({
@@ -45,6 +45,7 @@ const influx = new Influx.InfluxDB({
 //   })
 //   .catch(error => console.log({ error }));
 
+
 app.get('/', (request, response) => {
   influx.query(`
     select * from sensors 
@@ -63,4 +64,3 @@ app.get('/delete', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-module.exports = app;

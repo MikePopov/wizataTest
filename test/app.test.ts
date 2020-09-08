@@ -1,22 +1,22 @@
-const chai = require('chai'), chaiHttp = require('chai-http');
-const expect = chai.expect;
-const assert = require('assert');
-const main = require('../main');
-const app = require('../app');
-const event= require('../fixtures');
+import {main} from "../main";
+import {eventHubEvent} from "../fixtures";
+import chaiHttp from "chai-http";
+import { expect } from "chai";
+import {app} from "../app";
+import chai from "chai"
 
 
 chai.use(chaiHttp);
 chai.should();
 
 let date = new Date().toISOString();
-let hardwareId = event[1].HardwareId;
-let sensorValue = event[1].SensorValue;
+let hardwareId = eventHubEvent[1].HardwareId;
+let sensorValue = eventHubEvent[1].SensorValue;
 
 
 describe('',  () => {
   before(async () => {
-    await main.main(date, hardwareId, sensorValue);
+    await main(date, hardwareId, sensorValue);
   });
 
 

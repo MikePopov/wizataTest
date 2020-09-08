@@ -2,9 +2,9 @@ const { EventHubProducerClient } = require("@azure/event-hubs");
 
 const connectionString = "Endpoint=sb://wiz-test-qa.servicebus.windows.net/;SharedAccessKeyName=fn;SharedAccessKey=z6WjJKcsWFWyosTs2YDiTd/4c1iX0SJq6jOzve38lvk=;";
 const eventHubName = "devicemessages";
-const eventHubEvent = require('./fixtures')
 
-async function main(date, hardwareId, sensorValue) {
+
+export const main = async (date: any, hardwareId: string, sensorValue: number) => {
 
   // Create a producer client to send messages to the event hub.
   const producer = new EventHubProducerClient(connectionString, eventHubName);
@@ -27,10 +27,8 @@ async function main(date, hardwareId, sensorValue) {
   await producer.close();
 
   console.log("A batch have been sent to the event hub");
-}
+};
 
 // main('tTESTSESTSTSTSTSTST_4', 555).catch((err) => {
 //   console.log("Error occurred: ", err);
 // });
-
-exports.main = main;

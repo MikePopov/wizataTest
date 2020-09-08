@@ -1,4 +1,4 @@
-const eventHubEvent = [
+export const eventHubEvent = [
   {
     HardwareId: 'TEST_TEST_1',
     SensorValue: 20
@@ -10,5 +10,3 @@ const eventHubEvent = [
     SensorValue: 0
   },
 ];
-
-module.exports = eventHubEvent;
