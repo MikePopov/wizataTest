@@ -11,12 +11,14 @@ async function main(hardwareId, sensorValue) {
   // Prepare a batch of three events.
   const batch = await producer.createBatch();
   let date = new Date;
-  console.log(date.toISOString());
-  batch.tryAdd({ body: {
-    timestamp: date.toISOString(),
+  console.log(date);
+  batch.tryAdd({
+    body: {
+      timestamp: '2020-09-07T19:33:54.416Z',
       HardwareId: hardwareId,
       SensorValue: sensorValue
-    } });
+    }
+  });
 
 
   // Send the batch to the event hub.

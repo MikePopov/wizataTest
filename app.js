@@ -5,12 +5,12 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('port', 3005);
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.set('port', 3005);
 
 
 const influx = new Influx.InfluxDB({
@@ -46,9 +46,8 @@ const influx = new Influx.InfluxDB({
 //   .catch(error => console.log({ error }));
 
 app.get('/', (request, response) => {
-
   influx.query(`
-    select * from sensors
+    select * from sensors 
     limit 10
   `)
     .then(result => response.status(200).json(result))
