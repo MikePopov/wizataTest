@@ -43,28 +43,27 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
       await main(date, event.HardwareId, event.SensorValue);
     });
 
-    it(`all data samples should be saved in DB`, (done) => {
-      chai.request(app)
-        .get('/')
-        .end((err, res) => {
-          res.should.have.status(200);
-          // expect(res.body).to.deep.include( {
-          //     time: date,
-          //     sensorId: `${event.HardwareId}_mult`,
-          //     value: event.SensorValue*2
-          //   }
-          // );
-
-          console.log(res.body);
-          done();
-        });
-    });
+    // it(`all data samples should be saved in DB`, (done) => {
+    //   chai.request(app)
+    //     .get('/')
+    //     .end((err, res) => {
+    //       res.should.have.status(200);
+    //       // expect(res.body).to.deep.include( {
+    //       //     time: date,
+    //       //     sensorId: `${event.HardwareId}_mult`,
+    //       //     value: event.SensorValue*2
+    //       //   }
+    //       // );
+    //
+    //       console.log(res.body);
+    //       done();
+    //     });
+    // });
 
     it(`sensorID = ${event.HardwareId} should saved correctly`,(done) => {
       chai.request(app)
         .get('/')
         .end((err, res) => {
-          res.should.have.status(200);
           expect(res.body.map(e=>(e.sensorId))).to.include(`${event.HardwareId}_mult`);
           //console.log(res.body);
           done();
@@ -75,18 +74,16 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
       chai.request(app)
         .get('/')
         .end((err, res) => {
-          res.should.have.status(200);
           expect(res.body.map(e=>(e.value))).to.include(event.SensorValue*2);
           //console.log(res.body);
           done();
         });
     });
 
-    it.skip(`Time = ${date} should saved correctly`,(done) => {
+    it(`Time = ${date} should saved correctly`,(done) => {
       chai.request(app)
         .get('/')
         .end((err, res) => {
-          res.should.have.status(200);
           expect(res.body.map(e=>(e.time))).to.include(date);
           //console.log(res.body);
           done();
@@ -99,7 +96,6 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        res.should.have.status(200);
         for (let i = 0; i < positiveTestData.length; i++){
           expect(res.body[i]).to.have.deep.property('sensorId', `${positiveTestData[i].HardwareId}_mult`);
         }
@@ -114,3 +110,50 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
   });
 
 });
+
+describe('Equal data samples with different timestamps', () => {
+  let date1 = new Date ();
+  let date2 = new Date ( date1 );
+  date2.setMinutes( date1.getMinutes() + 1 );
+
+  const testData = [
+    {
+      Timestamp​: date1.toISOString(),
+      HardwareId: 'TEST_TEST_1',
+      SensorValue: 6
+    },
+    {
+      Timestamp​: date2.toISOString(),
+      HardwareId: 'TEST_TEST_1',
+      SensorValue: 6
+    }
+  ];
+
+  testData.forEach(event => {
+    before(async function () {
+      // console.log(date1.toISOString());
+      // console.log(date2.toISOString());
+      await main(event.Timestamp, event.HardwareId, event.SensorValue);
+    });
+
+    it('should saved correctly', (done) => {
+      chai.request(app)
+        .get('/')
+        .end((err, res) => {
+          expect(res.body).to.deep.include( {
+              time: event.Timestamp,
+              sensorId: `${event.HardwareId}_mult`,
+              value: event.SensorValue*2
+            }
+          );
+          done();
+        });
+    });
+
+    after(async () => {
+      console.log('Clean DB...');
+      await chai.request(app)
+        .get('/delete')
+    });
+  })
+})
