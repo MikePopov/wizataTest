@@ -1,4 +1,5 @@
-const { EventHubProducerClient } = require("@azure/event-hubs");
+import {EventHubProducerClient} from "@azure/event-hubs";
+
 
 const connectionString = "Endpoint=sb://wiz-test-qa.servicebus.windows.net/;SharedAccessKeyName=fn;SharedAccessKey=z6WjJKcsWFWyosTs2YDiTd/4c1iX0SJq6jOzve38lvk=;";
 const eventHubName = "devicemessages";
