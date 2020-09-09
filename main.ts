@@ -5,13 +5,14 @@ const connectionString = "Endpoint=sb://wiz-test-qa.servicebus.windows.net/;Shar
 const eventHubName = "devicemessages";
 
 
-export const main = async (date: any, hardwareId: string, sensorValue: number) => {
+export const main = async (date: any, hardwareId: string, sensorValue) => {
 
   // Create a producer client to send messages to the event hub.
   const producer = new EventHubProducerClient(connectionString, eventHubName);
 
   // Prepare a batch of three events.
   const batch = await producer.createBatch();
+
   batch.tryAdd({
     body: {
       timestamp: date,
@@ -27,9 +28,6 @@ export const main = async (date: any, hardwareId: string, sensorValue: number) =
   // Close the producer client.
   await producer.close();
 
-  console.log("A batch have been sent to the event hub");
+  console.log(`A batch have been sent to the event hub: ${[date, hardwareId, sensorValue]}`);
 };
 
-// main('tTESTSESTSTSTSTSTST_4', 555).catch((err) => {
-//   console.log("Error occurred: ", err);
-// });
