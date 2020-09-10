@@ -1,4 +1,4 @@
 For installing dependencies:
-npm install
+   npm install
 Test running:
-npm run test
+   npm run test
