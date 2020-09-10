@@ -19,7 +19,7 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
   testData.forEach(event => {
     before(async () => {
 
-      await main(date, event.HardwareId, event.SensorValue);
+      //await main(date, event.HardwareId, event.SensorValue);
     });
   });
 

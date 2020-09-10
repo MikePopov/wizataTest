@@ -21,15 +21,7 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
 
 
   before((done) => {
-
-
     send(testData);
-    // for (let i=0; i < testData.length; i++){
-    //   // await main(date, testData[i].HardwareId, testData[i].SensorValue);
-    //   setTimeout(function(y) {
-    //     console.log(testData[i].HardwareId);
-    //   }, i * 10000, i);
-    // }
     done()
   });
 
@@ -77,9 +69,9 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
       chai.request(app)
       .get('/')
       .end((err, res) => {
-        // for (let i = 0; i < testData.length; i++){
-        //   expect(res.body[i]).to.have.deep.property('sensorId', `${testData[i].HardwareId}_mult`);
-        // }
+        for (let i = 0; i < testData.length; i++){
+          expect(res.body[i]).to.have.deep.property('sensorId', `${testData[i].HardwareId}_mult`);
+        }
         console.log(res.body);
         done();
       }), 5000 * testData.length)
@@ -114,7 +106,7 @@ describe('Equal data samples with different timestamps', () => {
 
   testData.forEach(event => {
     before(async function () {
-      await main(event.Timestamp, event.HardwareId, event.SensorValue);
+      //await main(event.Timestamp, event.HardwareId, event.SensorValue);
     });
 
     it('should saved both Data samples', (done) => {
