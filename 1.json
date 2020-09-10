@@ -1,2 +1,68 @@
-{"time":"1754-08-30T22:43:41.128Z","sensorId":"test_mult","value":8},
-{"time":"2020-07-14T08:00:29.896Z","sensorId":"Wind_dir","value":99}
+[
+  { time: '2020-09-10T18:31:57.293Z', sensorId: 'Wind_dir', value: 44 },
+  {
+    time: '2020-09-10T18:31:57.293Z',
+    sensorId: 'Wind_dir_mult',
+    value: 88
+  },
+  {
+    time: '2020-09-10T18:31:57.293Z',
+    sensorId: 'Wind_speed',
+    value: 21.7
+  },
+  {
+    time: '2020-09-10T18:31:57.293Z',
+    sensorId: 'Wind_speed_mult',
+    value: 43.4
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_1',
+    value: 20
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_1_mult',
+    value: 40
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_2',
+    value: -1
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_2_mult',
+    value: -2
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_3',
+    value: 0
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_3_mult',
+    value: 0
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_4',
+    value: 12.3
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_4_mult',
+    value: 24.6
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_5_mult',
+    value: 0.000046
+  },
+  {
+    time: '2020-09-10T18:32:01.141Z',
+    sensorId: 'TEST_TEST_6_mult',
+    value: 19753086420
+  }
+]

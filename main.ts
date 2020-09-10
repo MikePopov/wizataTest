@@ -30,3 +30,15 @@ export const main = async (date: any, hardwareId: any, sensorValue: any) => {
 
   console.log(`A batch have been sent to the event hub: ${[date, hardwareId, sensorValue]}`);
 };
+
+export const send = (data: object) => {
+  for (let i=0; i < 5; i++){
+    setTimeout(() => {
+      let time = new Date().toISOString();
+      console.log(time, data[i].HardwareId, data[i].SensorValue)
+      main(time, data[i].HardwareId, data[i].SensorValue)
+
+    }, 5000*i);
+    //setTimeout(() => console.log(data[i].HardwareId), 5000 * i)
+  }
+}
