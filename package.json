@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 120000"
+    "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 120000",
+    "build": "tsc -p src",
+    "server": "node build/app.js"
   },
   "repository": {
     "type": "git",

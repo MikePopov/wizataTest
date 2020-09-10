@@ -1,0 +1,12 @@
+
+version: "3"
+services:
+  web:
+    image: influx
+    build: .
+    ports:
+      - "3005:3005"
+    environment:
+      NODE_ENV : docker
+    volumes:
+      - .:/usr/src/app

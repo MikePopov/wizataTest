@@ -1,7 +1,7 @@
 import {main} from "../main";
 import chaiHttp from "chai-http";
 import { expect } from "chai";
-import {app} from "../app";
+import {app} from "../src/app";
 import chai from "chai"
 import exp from "constants";
 
