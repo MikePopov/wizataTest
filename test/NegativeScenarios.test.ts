@@ -45,12 +45,12 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
       });
   });
 
-  it(`Undefined in sensor value should be saved correctly`, (done) => {
+  it(`Undefined in sensor value should not be saved`, (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.body.map(e=>(e.sensorId))).to.include(`${testData[2].HardwareId}_mult`);
-        expect(res.body.map(e=>(e.value))).to.include(0);
+        expect(res.body.map(e=>(e.sensorId))).to.not.include(`${testData[2].HardwareId}_mult`);
+        expect(res.body.map(e=>(e.value))).to.not.include(0);
         //console.log(res.body);
         done();
       });
