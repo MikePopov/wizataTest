@@ -3,7 +3,7 @@ import chaiHttp from "chai-http";
 import { expect } from "chai";
 import {app} from "../app";
 import chai from "chai"
-import exp from "constants";
+import {positiveTestData} from "./fixtures";
 
 
 chai.use(chaiHttp);
@@ -11,54 +11,17 @@ chai.should();
 chai.use(require('chai-like'));
 chai.use(require('chai-things'));
 
-const positiveTestData = [
-  {
-    HardwareId: 'TEST_TEST_1',
-    SensorValue: 20
-  },
-  {
-    HardwareId: 'TEST_TEST_2',
-    SensorValue: -1
-  },{
-    HardwareId: 'TEST_TEST_3',
-    SensorValue: 0
-  },{
-    HardwareId: 'TEST_TEST_4',
-    SensorValue: 12.3
-  },{
-    HardwareId: 'TEST_TEST_5',
-    SensorValue: 2.3e-5
-  }
-];
+const testData = positiveTestData;
 
 
 describe('Data from which was send to Event Hub should correctly saved in InfluxDb',  () => {
   let date = new Date().toISOString();
 
-  positiveTestData.forEach(event => {
+  testData.forEach(event => {
     before(async () => {
-      // await chai.request(app)
-      //      .get('/delete');
 
       await main(date, event.HardwareId, event.SensorValue);
     });
-
-    // it(`all data samples should be saved in DB`, (done) => {
-    //   chai.request(app)
-    //     .get('/')
-    //     .end((err, res) => {
-    //       res.should.have.status(200);
-    //       // expect(res.body).to.deep.include( {
-    //       //     time: date,
-    //       //     sensorId: `${event.HardwareId}_mult`,
-    //       //     value: event.SensorValue*2
-    //       //   }
-    //       // );
-    //
-    //       console.log(res.body);
-    //       done();
-    //     });
-    // });
 
     it(`sensorID = ${event.HardwareId} should saved correctly`,(done) => {
       chai.request(app)
@@ -96,8 +59,8 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        for (let i = 0; i < positiveTestData.length; i++){
-          expect(res.body[i]).to.have.deep.property('sensorId', `${positiveTestData[i].HardwareId}_mult`);
+        for (let i = 0; i < testData.length; i++){
+          expect(res.body[i]).to.have.deep.property('sensorId', `${testData[i].HardwareId}_mult`);
         }
         done();
       });
@@ -131,12 +94,10 @@ describe('Equal data samples with different timestamps', () => {
 
   testData.forEach(event => {
     before(async function () {
-      // console.log(date1.toISOString());
-      // console.log(date2.toISOString());
       await main(event.Timestamp, event.HardwareId, event.SensorValue);
     });
 
-    it('should saved correctly', (done) => {
+    it('should saved both Data samples', (done) => {
       chai.request(app)
         .get('/')
         .end((err, res) => {

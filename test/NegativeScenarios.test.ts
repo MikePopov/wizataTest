@@ -3,7 +3,7 @@ import chaiHttp from "chai-http";
 import { expect } from "chai";
 import {app} from "../app";
 import chai from "chai"
-import exp from "constants";
+import {negativeTestData} from "./fixtures";
 
 
 chai.use(chaiHttp);
@@ -11,40 +11,13 @@ chai.should();
 chai.use(require('chai-like'));
 chai.use(require('chai-things'));
 
-const negativeTestData = [
-  {
-    HardwareId: 'TEST_TEST_1',
-    SensorValue: 'd'
-  },
-  {
-    HardwareId: 'TEST_TEST_2',
-    SensorValue: null
-  },{
-    HardwareId: 'TEST_TEST_3',
-    SensorValue: undefined
-  },
-  {
-    HardwareId: null,
-    SensorValue: 4
-  },
-  {
-   HardwareId: undefined,
-    SensorValue: 5
-  },
-  {
-    HardwareId: 666,
-    SensorValue: 6
-  }
-];
-
+const testData = negativeTestData;
 
 describe('Negative data was send to Event Hub in InfluxDb',  () => {
   let date = new Date().toISOString();
 
-  negativeTestData.forEach(event => {
+  testData.forEach(event => {
     before(async () => {
-      // await chai.request(app)
-      //      .get('/delete');
 
       await main(date, event.HardwareId, event.SensorValue);
     });
@@ -54,9 +27,9 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.body.map(e=>(e.sensorId))).to.not.include(`${negativeTestData[0].HardwareId}_mult`);
-        expect(res.body.map(e=>(e.value))).to.not.include(Number(negativeTestData[0].SensorValue)*2);
-        console.log(res.body);
+        expect(res.body.map(e=>(e.sensorId))).to.not.include(`${testData[0].HardwareId}_mult`);
+        expect(res.body.map(e=>(e.value))).to.not.include(Number(testData[0].SensorValue)*2);
+        //console.log(res.body);
         done();
       });
   });
@@ -65,9 +38,9 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.body.map(e=>(e.sensorId))).to.not.include(`${negativeTestData[1].HardwareId}_mult`);
+        expect(res.body.map(e=>(e.sensorId))).to.not.include(`${testData[1].HardwareId}_mult`);
         expect(res.body.map(e=>(e.value))).to.not.include(null);
-        console.log(res.body);
+        //console.log(res.body);
         done();
       });
   });
@@ -76,9 +49,9 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        expect(res.body.map(e=>(e.sensorId))).to.include(`${negativeTestData[2].HardwareId}_mult`);
+        expect(res.body.map(e=>(e.sensorId))).to.include(`${testData[2].HardwareId}_mult`);
         expect(res.body.map(e=>(e.value))).to.include(0);
-        console.log(res.body);
+        //console.log(res.body);
         done();
       });
   });
@@ -89,8 +62,8 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
       .end((err, res) => {
         expect(res.body.map(e=>(e.sensorId))).to.not.include(null);
         expect(res.body.map(e=>(e.sensorId))).to.not.include('_mult');
-        expect(res.body.map(e=>(e.value))).to.not.include(negativeTestData[3].SensorValue);
-        console.log(res.body);
+        expect(res.body.map(e=>(e.value))).to.not.include(testData[3].SensorValue);
+        //console.log(res.body);
         done();
       });
   });
@@ -101,8 +74,8 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
       .end((err, res) => {
         expect(res.body.map(e=>(e.sensorId))).to.not.include(null);
         expect(res.body.map(e=>(e.sensorId))).to.not.include('_mult');
-        expect(res.body.map(e=>(e.value))).to.not.include(negativeTestData[4].SensorValue);
-        console.log(res.body);
+        expect(res.body.map(e=>(e.value))).to.not.include(testData[4].SensorValue);
+        //console.log(res.body);
         done();
       });
   });
@@ -111,9 +84,9 @@ describe('Negative data was send to Event Hub in InfluxDb',  () => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
-        let sensorValue = negativeTestData[4].SensorValue;
+        let sensorValue = testData[4].SensorValue;
         expect(res.body.map(e=>(e.value))).to.not.include(sensorValue);
-        console.log(res.body);
+        //console.log(res.body);
         done();
       });
   });
