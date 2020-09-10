@@ -49,7 +49,7 @@ const influx = new Influx.InfluxDB({
 app.get('/', (request, response) => {
   influx.query(`
     select * from sensors 
-    limit 10
+    limit 30
   `)
     .then(result => response.status(200).json(result))
     .catch(error => response.status(500).json({ error }));

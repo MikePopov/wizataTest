@@ -15,7 +15,7 @@ export const main = async (date: any, hardwareId: any, sensorValue: any) => {
 
   batch.tryAdd({
     body: {
-      timestamp: date,
+      Timestamp: date,
       HardwareId: hardwareId,
       SensorValue: sensorValue
     }

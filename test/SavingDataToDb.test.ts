@@ -55,13 +55,14 @@ describe('Data from which was send to Event Hub should correctly saved in Influx
 
   });
 
-  it(`order of data samples should be the same as was send to Event hub`, (done) => {
+  it.only(`order of data samples should be the same as was send to Event hub`, (done) => {
     chai.request(app)
       .get('/')
       .end((err, res) => {
         for (let i = 0; i < testData.length; i++){
           expect(res.body[i]).to.have.deep.property('sensorId', `${testData[i].HardwareId}_mult`);
         }
+        console.log(res.body);
         done();
       });
   });
