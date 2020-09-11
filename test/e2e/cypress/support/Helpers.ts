@@ -1,4 +1,4 @@
-import {positiveTestData} from "../../../fixtures";
+import {positiveTestData} from "./fixtures";
 
 export class Helpers {
   sendDataSampleToEventHub (data, waitMs) {

@@ -29,7 +29,7 @@ export const main = async (data) => {
   // Close the producer client.
   await producer.close();
 
-  console.log(`111111A batch have been sent to the event hub: ${date}, ${data.HardwareId}, ${data.SensorValue}`);
+  console.log(`A batch have been sent to the event hub: ${date}, ${data.HardwareId}, ${data.SensorValue}`);
 };
 
 // export const send = (data: object) => {

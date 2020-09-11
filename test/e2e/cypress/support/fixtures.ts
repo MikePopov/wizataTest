@@ -43,3 +43,30 @@ export const negativeTestData = [
     SensorValue: 6
   }
 ];
+
+export const equalTestData = [
+  {
+    HardwareId: 'TEST_TEST_1',
+    SensorValue: 20
+  },
+  {
+    HardwareId: 'TEST_TEST_1',
+    SensorValue: 30
+  },{
+    HardwareId: 'TEST_TEST_2',
+    SensorValue: -2
+  },
+  {
+    HardwareId: 'TEST_TEST_2',
+    SensorValue: -5
+  },
+  {
+    HardwareId: 'TEST_TEST_3',
+    SensorValue: -5
+  },
+  {
+    HardwareId: 'TEST_TEST_4',
+    SensorValue: -5
+  }
+
+];
