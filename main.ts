@@ -5,7 +5,7 @@ const connectionString = "Endpoint=sb://wiz-test-qa.servicebus.windows.net/;Shar
 const eventHubName = "devicemessages";
 
 
-export const main = async (hardwareId: any, sensorValue: any) => {
+export const main = async (data) => {
 
   // Create a producer client to send messages to the event hub.
   const producer = new EventHubProducerClient(connectionString, eventHubName);
@@ -17,8 +17,8 @@ export const main = async (hardwareId: any, sensorValue: any) => {
   batch.tryAdd({
     body: {
       Timestamp: date,
-      HardwareId: hardwareId,
-      SensorValue: sensorValue
+      HardwareId: data.HardwareId,
+      SensorValue: data.SensorValue
     }
   });
 
@@ -29,14 +29,14 @@ export const main = async (hardwareId: any, sensorValue: any) => {
   // Close the producer client.
   await producer.close();
 
-  console.log(`A batch have been sent to the event hub: ${[date, hardwareId, sensorValue]}`);
+  console.log(`111111A batch have been sent to the event hub: ${date}, ${data.HardwareId}, ${data.SensorValue}`);
 };
 
-export const send = (data: object) => {
-  for (let i=0; i < 5; i++){
-    setTimeout(() => {
-      main(data[i].HardwareId, data[i].SensorValue)
-    }, 5000*i);
-    //setTimeout(() => console.log(data[i].HardwareId), 5000 * i)
-  }
-}
+// export const send = (data: object) => {
+//   for (let i=0; i < 5; i++){
+//     setTimeout(() => {
+//       main(data[i].HardwareId, data[i].SensorValue)
+//     }, 5000*i);
+//     //setTimeout(() => console.log(data[i].HardwareId), 5000 * i)
+//   }
+// }

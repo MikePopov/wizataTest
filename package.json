@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 120000"
+    "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 120000",
+    "build": "tsc -p src",
+    "server": "node dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -39,7 +41,6 @@
     "mocha": "^8.1.3",
     "should": "^13.2.3",
     "ts-sinon": "^2.0.1",
-    "tslint": "^6.1.3",
-    "typescript": "^3.3.3"
+    "tslint": "^6.1.3"
   }
 }
