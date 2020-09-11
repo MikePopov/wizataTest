@@ -92,57 +92,108 @@ describe('Validation data which was sent to EventHub and compare with Db',()=>{
     });
 
 
-    it(`Data Sample with SensorValue = String should not saved`, function () {
+    it(`Original Data Sample with SensorValue = String should not saved`, function () {
       cy.request('/').its('body').then(body => {
         let testDataObject = negativeTestData[0];
         expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
-        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
-        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
         expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
       })
     });
 
-    it(`Data Sample with SensorValue = null should not saved`, function () {
+    it(`Multiplied Data Sample with SensorValue = String should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        let testDataObject = negativeTestData[0];
+        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
+        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
+      })
+    });
+
+    it(`Original Data Sample with SensorValue = null should not saved`, function () {
       cy.request('/').its('body').then(body => {
         let testDataObject = negativeTestData[1];
         expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
+        expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
+      })
+    });
+
+    it(`Multiplied Data Sample with SensorValue = null should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        let testDataObject = negativeTestData[1];
         expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
         expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
       })
     });
 
-    it(`Data Sample with SensorValue = undefined should not saved`, function () {
+    it(`Original Data Sample with SensorValue = undefined should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        console.log(body);
+        let testDataObject = negativeTestData[2];
+        expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
+        expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
+      })
+    });
+
+    it(`Multiplied Data Sample with SensorValue = undefined should not saved`, function () {
       cy.request('/').its('body').then(body => {
         console.log(body);
         let testDataObject = negativeTestData[2];
         expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
         expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
-        expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
       })
     });
 
-    it(`Data Sample with HardwareID = null should not saved`, function () {
+    it(`Original Data Sample with HardwareID = null should not saved`, function () {
       cy.request('/').its('body').then(body => {
         console.log(body);
         let testDataObject = negativeTestData[3];
         expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
-        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
-        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
         expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
       })
     });
 
-    it.only(`Data Sample with HardwareID = undefined should not saved`, function () {
+    it(`Multiplied Data Sample with HardwareID = null should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        console.log(body);
+        let testDataObject = negativeTestData[3];
+        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
+        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
+      })
+    });
+
+    it(`Original Data Sample with HardwareID = undefined should not saved`, function () {
       cy.request('/').its('body').then(body => {
         console.log(body);
         let testDataObject = negativeTestData[4];
         expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
-        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
-        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
         expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
       })
     });
 
-  })
+    it(`Multiplied Data Sample with HardwareID = undefined should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        console.log(body);
+        let testDataObject = negativeTestData[4];
+        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
+        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
+      })
+    });
 
+    it(`Original Data Sample with HardwareID = number should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        console.log(body);
+        let testDataObject = negativeTestData[5];
+        expect(body.map(e=>(e.value))).to.not.include(testDataObject.SensorValue);
+        expect(body.map(e=>(e.sensorId))).to.not.include(testDataObject.HardwareId);
+      })
+    });
+
+    it(`Multiplied Data Sample with HardwareID = number should not saved`, function () {
+      cy.request('/').its('body').then(body => {
+        console.log(body);
+        let testDataObject = negativeTestData[5];
+        expect(body.map(e=>(e.value))).to.not.include(Number(testDataObject.SensorValue)*2);
+        expect(body.map(e=>(e.sensorId))).to.not.include(`${testDataObject.HardwareId}_mult`);
+      })
+    });
+  })
 })
