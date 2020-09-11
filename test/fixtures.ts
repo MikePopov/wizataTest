@@ -24,7 +24,7 @@ export const positiveTestData = [
 export const negativeTestData = [
   {
     HardwareId: 'TEST_TEST_1',
-    SensorValue: 'd'
+    SensorValue: '6'
   },
   {
     HardwareId: 'TEST_TEST_2',
@@ -35,11 +35,11 @@ export const negativeTestData = [
   },
   {
     HardwareId: null,
-    SensorValue: 4
+    SensorValue: 777
   },
   {
     HardwareId: undefined,
-    SensorValue: 5
+    SensorValue: 888
   },
   {
     HardwareId: 666,
