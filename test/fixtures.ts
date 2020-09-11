@@ -14,9 +14,6 @@ export const positiveTestData = [
     SensorValue: 12.3
   },{
     HardwareId: 'TEST_TEST_5',
-    SensorValue: 2.3e-5
-  },{
-    HardwareId: 'TEST_TEST_6',
     SensorValue: 9876543210
   }
 ];
