@@ -14,9 +14,6 @@ export const positiveTestData = [
     SensorValue: 12.3
   },{
     HardwareId: 'TEST_TEST_5',
-    SensorValue: 2.3e-5
-  },{
-    HardwareId: 'TEST_TEST_6',
     SensorValue: 9876543210
   }
 ];
@@ -24,7 +21,7 @@ export const positiveTestData = [
 export const negativeTestData = [
   {
     HardwareId: 'TEST_TEST_1',
-    SensorValue: 'd'
+    SensorValue: '6'
   },
   {
     HardwareId: 'TEST_TEST_2',
@@ -35,14 +32,41 @@ export const negativeTestData = [
   },
   {
     HardwareId: null,
-    SensorValue: 4
+    SensorValue: 777
   },
   {
     HardwareId: undefined,
-    SensorValue: 5
+    SensorValue: 888
   },
   {
     HardwareId: 666,
     SensorValue: 6
   }
+];
+
+export const equalTestData = [
+  {
+    HardwareId: 'TEST_TEST_1',
+    SensorValue: 20
+  },
+  {
+    HardwareId: 'TEST_TEST_1',
+    SensorValue: 30
+  },{
+    HardwareId: 'TEST_TEST_2',
+    SensorValue: -2
+  },
+  {
+    HardwareId: 'TEST_TEST_2',
+    SensorValue: -5
+  },
+  {
+    HardwareId: 'TEST_TEST_3',
+    SensorValue: -5
+  },
+  {
+    HardwareId: 'TEST_TEST_4',
+    SensorValue: -5
+  }
+
 ];
