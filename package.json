@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts --timeout 120000",
-    "build": "tsc src/*.ts",
+    "build": "tsc -p src",
     "server": "node dist/app.js"
   },
   "repository": {
